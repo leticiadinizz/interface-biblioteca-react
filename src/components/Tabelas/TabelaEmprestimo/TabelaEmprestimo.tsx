@@ -11,6 +11,9 @@ import EmprestimoRequests from '../../../fetch/EmprestimoRequests'; // Importa a
 // Importa o arquivo CSS com estilos específicos para este componente
 import estilo from './TabelaEmprestimo.module.css'; // Importa os estilos específicos para este componente
 import EmprestimoDTO from '../../../interfaces/EmprestimoInterface';
+import { APP_ROUTES } from '../../../appConfig';
+
+
 
 function TabelaEmprestimo(): JSX.Element {
     // Define o estado local para armazenar os dados dos empréstimos
@@ -31,12 +34,35 @@ function TabelaEmprestimo(): JSX.Element {
 
         fetchEmprestimos(); // Executa a função de busca
     }, []); // Array vazio indica que esse efeito será executado apenas uma vez (componenteDidMount)
+    const deletar = async (emprestimo: EmprestimoDTO) => {
+    const confirmar = window.confirm(
+        `Deseja mesmo remover o empréstimo de ID ${emprestimo.idEmprestimo}?`
+    );
+
+    if (confirmar && typeof emprestimo.idEmprestimo === "number") {
+        const removido = await EmprestimoRequests.removerEmprestimo(emprestimo.idEmprestimo);
+
+        if (removido) {
+            window.location.reload(); // atualiza a tabela
+        } else {
+            alert("Erro ao remover empréstimo.");
+        }
+    } else if (confirmar) {
+        alert("ID do empréstimo inválido.");
+    }
+};
 
     return (
         <main>
             {/* Título da tabela com classe personalizada */}
             <h1 className={estilo['header-tabela-emprestimo']}>Lista de Empréstimos</h1>
 
+             <a
+                href={APP_ROUTES.ROUTE_CADASTRO_EMPRESTIMO}
+                className={estilo['anc-pag-cadastro']}
+            >
+                CADASTRAR ALUNO
+            </a>
             {/* Componente DataTable: renderiza a tabela com os dados dos empréstimos */}
             <DataTable
                 value={emprestimos} // Define os dados que serão exibidos
@@ -80,10 +106,25 @@ function TabelaEmprestimo(): JSX.Element {
                         const ano = data.getFullYear(); // Obtém o ano
                         return `${dia}/${mes}/${ano}`; // Retorna a data formatada
                     }}
-                />
-
+/>
                 {/* Coluna com o status do empréstimo (ex: "pendente", "devolvido") */}
                 <Column field="statusEmprestimo" header="Status do empréstimo" headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)'}} style={{ width: '15%', color: 'var(--font-color)' }} />
+                
+                <Column
+                field="idEmprestimo"
+                header="Ação"
+                headerStyle={{ backgroundColor: "var(--cor-primaria)", color: "var(--font-color)" }}
+                style={{ width: "15%", color: "var(--font-color)" }}
+                body={(rowdata: EmprestimoDTO) => (
+                <>
+                <button
+                     style={{ width: "100%" }}
+                     onClick={() => deletar(rowdata)}
+                     >
+                        Deletar</button>
+                        </>
+                        )}
+                    />
             </DataTable>
         </main>
     );

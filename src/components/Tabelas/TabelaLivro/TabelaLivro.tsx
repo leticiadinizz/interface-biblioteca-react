@@ -33,6 +33,22 @@ function TabelaLivro(): JSX.Element {
         fetchLivros(); // Executa a função de busca
     }, []); // Array vazio garante que será executado apenas uma vez (montagem do componente)
 
+    const deletar = async (livro: LivroDTO) => {
+        const confirmar = window.confirm(`Deseja mesmo remover o livro "${livro.titulo}" de ${livro.autor}?`
+        );
+        
+        if (confirmar && typeof livro.idLivro === "number") {
+            const removido = await LivroRequests.removerLivro(livro.idLivro);
+            if (removido) {
+                window.location.reload(); 
+            } else {
+                alert("Erro ao remover livro.");
+            }
+        } else if (confirmar) {
+            alert("ID do livro inválido.");
+        }
+    };
+
     return (
         <main>
             {/* Título da tabela com classe personalizada */}
@@ -75,10 +91,26 @@ function TabelaLivro(): JSX.Element {
                             currency: 'BRL',
                         }); // Formata como moeda brasileira
                     }}
-                />
+                    />
+                <Column
+                    field="idLivro"
+                    header="Ação"
+                    headerStyle={{ backgroundColor: "var(--cor-primaria)", color: "var(--font-color)" }}
+                    style={{ width: "15%", color: "var(--font-color)" }}
+                    body={(rowdata: LivroDTO) => (
+                <>
+                <button
+                style={{ width: "100%" }}
+                onClick={() => deletar(rowdata)}
+                >
+                Deletar</button>
+                </>
+            )}
+            />
             </DataTable>
         </main>
     );
+
 }
 
 // Exporta o componente para ser utilizado em outros arquivos

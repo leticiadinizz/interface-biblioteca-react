@@ -48,7 +48,7 @@ class EmprestimoRequests {
                 // Retorna a lista obtida
                 return listaDeEmprestimos;
             }
-
+            
             // retorna um valor nulo caso o servidor não envie a resposta
             return null;
         } catch (error) {
@@ -59,7 +59,55 @@ class EmprestimoRequests {
             return null;
         }
     }
-}
+
+    async enviaFormularioEmprestimo(formData: object): Promise<boolean> {
+        const token = localStorage.getItem("token");
+        try {
+            const respostaAPI = await fetch(`${this.serverURL}${this.routeCadastraEmprestimo}`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'x-access-token': `${token}`
+                    },
+                    body: JSON.stringify(formData)
+                }
+            );
+
+            if(!respostaAPI.ok) {
+                throw new Error("Erro ao fazer a requisição com o servidor.");
+            }
+
+            return true;
+        } catch (error) {
+            console.error(`Erro ao enviar o formulário. ${error}`);
+            return false;
+        }
+    }
+    
+     async removerEmprestimo(idEmprestimo: number): Promise<boolean> {
+        const token = localStorage.getItem("token");
+        try {
+            const respostaAPI = await fetch(
+                `${this.serverURL}${this.routeRemoveEmprestimo}?idEmprestimo=${idEmprestimo}`,
+                {
+                    method: "PUT", // mantém o mesmo método que você usou em aluno
+                    headers: {
+                        "Content-type": "application/json",
+                        "x-access-token": `${token}`,
+                     },
+                    }
+                );
+                if (!respostaAPI.ok) {
+                    throw new Error("Erro ao fazer requisição à API");
+                 }
+                 return true;
+                } catch (error) {
+                    console.error(`Erro ao fazer solicitação: ${error}`);
+                    return false;
+                }
+            }
+        }
 
 // Exporta a classe já instanciada, pronta para ser utilizada em outras partes do sistema
 export default new EmprestimoRequests();
