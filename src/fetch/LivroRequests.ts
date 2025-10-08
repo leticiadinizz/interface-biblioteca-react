@@ -106,6 +106,31 @@ class LivroRequests {
                 return false;
             }
         }
+         async enfiarFormularioAtualizacaoLivro(formLivro: LivroDTO): Promise<boolean>{
+            const token = localStorage.getItem('token');
+
+        try {
+            const respostaAPI = 
+            await fetch(`${this.serverURL}${this.routeAtualizaLivro} 
+                ?idAluno=${formLivro.idLivro}`,{
+                    method: 'PUT',
+                    headers: {
+                        'Content-type': 'aplication/json',
+                        'x-acess-token': `${token}`
+                    },
+                    body: JSON.stringify(formLivro)
+                });
+               
+            if(respostaAPI.ok) {
+                throw new Error ('Erro ao fazer a requisição com o servidor.');
+            }
+
+            return true;
+        } catch (error) {
+            console.error(`Erro ao enviar requisição. ${error}`);
+            return false;
+        }
+    }
     }
 
 // Exporta a classe já com um objeto instanciado para ser usado diretamente

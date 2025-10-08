@@ -1,5 +1,5 @@
 const API_SERVER_URL = import.meta.env.VITE_API_SERVER_URL;
-const API_SERVER_PORT = import.meta.env.VITE_API_SERVER_PORT;
+//const API_SERVER_PORT = import.meta.env.VITE_API_SERVER_PORT;
 
 /**
  
@@ -17,7 +17,11 @@ export const APP_ROUTES = {
 
     ROUTE_CADASTRO_ALUNO: '/cadastro/aluno',
     ROUTE_CADASTRO_LIVRO: '/cadastro/livro',
-    ROUTE_CADASTRO_EMPRESTIMO: '/cadastro/emprestimo'
+    ROUTE_CADASTRO_EMPRESTIMO: '/cadastro/emprestimo',
+
+    ROUTE_ATUALIZACAO_ALUNO: '/atualizar/aluno',
+    ROUTE_ATUALIZACAO_EMPRESTIMO: '/atualizar/emprestimo',
+    ROUTE_ATUALIZACAO_LIVRO: 'atualizar/livro'
 }
 /**
  

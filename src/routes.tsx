@@ -9,6 +9,9 @@ import PListagemLivros from './pages/PListagem/PListaLivros/PListaLivros';
 import PCadastroAluno from './pages/PCadastro/PCadastroAluno/PCadastroAluno';
 import PCadastroLivro from './pages/PCadastro/PCadastroLivro/PCadastroLivro';
 import PCadastroEmprestimo from './pages/PCadastroEmprestimo/PCadastrosEmprestimo';
+import PAtualizacaoAluno from './pages/PAtualizacao/PAtualizacaoAluno/PAtualizacaoAluno';
+import PAtualizacaoEmprestimo from './pages/PAtualizacao/PAtualizacaoEmpestimo/PAtualizacaoEmprestimo';
+import PAtualizacaoLivro from './pages/PAtualizacao/PAtualizacaoLivro/PAtualizacaoLivro';
 
 /**
  * Componente que irá lidar com todas as rotas da aplicação
@@ -33,6 +36,12 @@ function AppRoutes(): JSX.Element {
                 <Route path={APP_ROUTES.ROUTE_CADASTRO_ALUNO} element={<PCadastroAluno />} />
                 <Route path={APP_ROUTES.ROUTE_CADASTRO_LIVRO} element={<PCadastroLivro />} />
                 <Route path={APP_ROUTES.ROUTE_CADASTRO_EMPRESTIMO} element={<PCadastroEmprestimo/>}/>
+
+                <Route path={`${APP_ROUTES.ROUTE_ATUALIZACAO_ALUNO}/:idAluno` }element={<PAtualizacaoAluno/>}/>
+                <Route path={`${APP_ROUTES.ROUTE_ATUALIZACAO_EMPRESTIMO}/:idEmprestimo` }element={<PAtualizacaoEmprestimo/>}/>
+                <Route path={`${APP_ROUTES.ROUTE_ATUALIZACAO_LIVRO}/:idLivro` }element={<PAtualizacaoLivro/>}/>
+
+
             </Routes>
         </BrowserRouter>
     );
