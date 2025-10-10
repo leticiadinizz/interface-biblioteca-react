@@ -7,9 +7,11 @@ import EmprestimoDTO from "../interfaces/EmprestimoInterface";
  * Com essa classe, conseguimos listar, cadastrar, atualizar e remover empréstimos no sistema.
  */
 class EmprestimoRequests {
+    [x: string]: any;
 
     private serverURL: string;                  // Variável para o endereço do servidor
     private routeListaEmprestimos: string;      // Variável para a rota de listagem de empréstimos
+    private routeListaEmprestimo: string | undefined;      // Variável para a rota de listagem de empréstimo
     private routeCadastraEmprestimo: string;    // Variável para a rota de cadastro de empréstimo
     private routeAtualizaEmprestimo: string;    // Variável para a rota de atualiação de aluno
     private routeRemoveEmprestimo: string;      // Variável para a rota de remoção do aluno
@@ -21,6 +23,7 @@ class EmprestimoRequests {
     constructor() {
         this.serverURL = SERVER_CFG.SERVER_URL;               // Endereço do servidor web
         this.routeListaEmprestimos = SERVER_CFG.ENDPOINT_LISTAR_EMPRESTIMOS;    // Rota para buscar todos os empréstimos
+        this.routeListaEmprestimo = SERVER_CFG.ENDPOINT_LISTAR_EMPRESTIMO;    // Rota para buscar todos os empréstimo
         this.routeCadastraEmprestimo = SERVER_CFG.ENDPOINT_CADASTRAR_EMPRESTIMO;    // Rota para cadastrar um novo empréstimo
         this.routeAtualizaEmprestimo = SERVER_CFG.ENDPOINT_ATUALIZAR_EMPRESTIMO;// Rota para atualizar um empréstimo existente
         this.routeRemoveEmprestimo = SERVER_CFG.ENDPOINT_REMOVER_EMPRESTIMO;    // Rota para remover um empréstimo

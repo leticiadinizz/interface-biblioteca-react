@@ -35,18 +35,21 @@ export const SERVER_CFG = {
 
     // endpoints de aluno
     ENDPOINT_LISTAR_ALUNOS: '/lista/alunos',
+    ENDPOINT_LISTAR_ALUNO: 'lista/aluno',
     ENDPOINT_CADASTRAR_ALUNO: '/novo/aluno',
     ENDPOINT_ATUALIZAR_ALUNO: '/atualiza/aluno',
     ENDPOINT_REMOVER_ALUNO: '/remove/aluno',
 
     // endpoints de livro
     ENDPOINT_LISTAR_LIVROS: '/lista/livros',
+    ENDPOINT_LISTAR_LIVRO: 'lista/livro',
     ENDPOINT_CADASTRAR_LIVRO: '/novo/livro',
     ENDPOINT_ATUALIZAR_LIVRO: '/atualiza/livro',
     ENDPOINT_REMOVER_LIVRO: '/remove/livro',
 
     // endpoints de emprestimo
     ENDPOINT_LISTAR_EMPRESTIMOS: '/lista/emprestimos',
+    ENDPOINT_LISTAR_EMPRESTIMO: '/lista/emprestimo',
     ENDPOINT_CADASTRAR_EMPRESTIMO: '/novo/emprestimo',
     ENDPOINT_ATUALIZAR_EMPRESTIMO: '/atualiza/emprestimo',
     ENDPOINT_REMOVER_EMPRESTIMO: '/remove/emprestimo',

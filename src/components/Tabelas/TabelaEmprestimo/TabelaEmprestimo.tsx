@@ -61,7 +61,7 @@ function TabelaEmprestimo(): JSX.Element {
                 href={APP_ROUTES.ROUTE_CADASTRO_EMPRESTIMO}
                 className={estilo['anc-pag-cadastro']}
             >
-                CADASTRAR ALUNO
+                CADASTRAR EMPRESTIMO
             </a>
             {/* Componente DataTable: renderiza a tabela com os dados dos empréstimos */}
             <DataTable
@@ -122,6 +122,10 @@ function TabelaEmprestimo(): JSX.Element {
                      onClick={() => deletar(rowdata)}
                      >
                         Deletar</button>
+                          <button
+                                style={{ width: '100%' }}
+                                onClick={() => window.location.href=`/atualizar/emprestimo/${rowdata.idEmprestimo}`}
+                            >Atualizar</button>
                         </>
                         )}
                     />
